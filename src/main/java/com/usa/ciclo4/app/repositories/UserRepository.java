@@ -42,4 +42,8 @@ public class UserRepository {
         return userCrudRepository.findById(id);
     }
 
+    public void deleteById (Integer id){
+        userCrudRepository.deleteById(id);
+    }
+
 }

@@ -12,45 +12,90 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UserRepository  userRepository;
+    private UserRepository userRepository;
 
-    public List<User> getAll(){
+    public List<User> getAll() {
         return userRepository.getAll();
     }
 
-    public boolean getUserByEmail(String email){
+    public boolean getUserByEmail(String email) {
         return userRepository.getUserByEmail(email).isPresent();
     }
 
-    public User getUserByEmailAndPassword(String email, String password){
-        Optional<User> userExist=userRepository.getUserByEmailAndPassword(email, password);
-        if(userExist.isPresent()){
+    public User getUserByEmailAndPassword(String email, String password) {
+        Optional<User> userExist = userRepository.getUserByEmailAndPassword(email, password);
+        if (userExist.isPresent()) {
             return userExist.get();
-        }else{
-            return new User(null, email, password,"NO DEFINIDO");
+        } else {
+            return new User();
         }
     }
 
-    public User save(User u){
-        if(u.getName()==null || u.getEmail()==null || u.getPassword()==null){
+    public User save(User u) {
+        if (u.getName() == null || u.getEmail() == null || u.getPassword() == null || u.getIdentification() == null || u.getType() == null) {
             return u;
-        }else{
-            List<User> existUser=userRepository.getUsersByNameOrEmail(u.getName(), u.getEmail());
-            if(existUser.isEmpty()){
-                if(u.getId()==null){
+        } else {
+            List<User> existUser = userRepository.getUsersByNameOrEmail(u.getName(), u.getEmail());
+            if (existUser.isEmpty()) {
+                if (u.getId() == null) {
                     return userRepository.save(u);
-                }else{
+                } else {
                     Optional<User> existUserId = userRepository.getUserById(u.getId());
-                    if(existUserId.isEmpty()){
+                    if (existUserId.isEmpty()) {
                         return userRepository.save(u);
-                    }else{
+                    } else {
                         return u;
                     }
                 }
-            }else{
+            } else {
                 return u;
             }
         }
+    }
+
+    public User update(User u) {
+        if (u.getId() != null) {
+            Optional<User> userExist = userRepository.getUserById(u.getId());
+            if (userExist.isPresent()) {
+                if (u.getIdentification() != null) {
+                    userExist.get().setIdentification(u.getIdentification());
+                }
+                if (u.getName() != null) {
+                    userExist.get().setName(u.getName());
+                }
+                if (u.getAddress() != null) {
+                    userExist.get().setAddress(u.getAddress());
+                }
+                if (u.getCellPhone() != null) {
+                    userExist.get().setCellPhone(u.getCellPhone());
+                }
+                if (u.getEmail() != null) {
+                    userExist.get().setEmail(u.getEmail());
+                }
+                if (u.getPassword() != null) {
+                    userExist.get().setPassword(u.getPassword());
+                }
+                if (u.getZone() != null) {
+                    userExist.get().setZone(u.getZone());
+                }
+                if (u.getType() != null) {
+                    userExist.get().setType(u.getType());
+                }
+                return userRepository.save(u);
+            } else {
+                return u;
+            }
+        } else {
+            return u;
+        }
+    }
+
+    public boolean deleteById(Integer id) {
+        Boolean aBoolean = userRepository.getUserById(id).map(user -> {
+            userRepository.deleteById(id);
+            return true;
+        }).orElse(false);
+        return aBoolean;
     }
 
 }
