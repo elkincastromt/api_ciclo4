@@ -1,6 +1,7 @@
 package com.usa.ciclo4.app.repositories;
 
 import com.usa.ciclo4.app.model.Clone;
+import com.usa.ciclo4.app.model.User;
 import com.usa.ciclo4.app.repositories.crud.CloneCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

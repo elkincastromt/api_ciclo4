@@ -18,6 +18,10 @@ public class UserService {
         return userRepository.getAll();
     }
 
+    public Optional<User> getUser(int id){
+        return userRepository.getUserById(id);
+    }
+
     public boolean getUserByEmail(String email) {
         return userRepository.getUserByEmail(email).isPresent();
     }

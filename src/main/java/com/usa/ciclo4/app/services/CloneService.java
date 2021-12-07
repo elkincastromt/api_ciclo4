@@ -1,6 +1,7 @@
 package com.usa.ciclo4.app.services;
 
 import com.usa.ciclo4.app.model.Clone;
+import com.usa.ciclo4.app.model.User;
 import com.usa.ciclo4.app.repositories.CloneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,10 @@ public class CloneService {
 
     public List<Clone> getAll() {
         return cloneRepository.getAll();
+    }
+
+    public Optional<Clone> getClone(int id){
+        return cloneRepository.getCloneById(id);
     }
 
     public Clone save(Clone c){

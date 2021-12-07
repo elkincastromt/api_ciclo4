@@ -1,6 +1,7 @@
 package com.usa.ciclo4.app.controllers;
 
 import com.usa.ciclo4.app.model.Clone;
+import com.usa.ciclo4.app.model.User;
 import com.usa.ciclo4.app.services.CloneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("clone")
@@ -20,6 +22,11 @@ public class CloneController {
     @GetMapping("/all")
     public List<Clone> getClones(){
         return CloneService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Clone> getClone(@PathVariable("id") int id){
+        return CloneService.getClone(id);
     }
 
     @PostMapping("/new")
