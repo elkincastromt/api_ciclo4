@@ -1,7 +1,7 @@
 package com.usa.ciclo4.app.services;
 
 import com.usa.ciclo4.app.model.Clone;
-import com.usa.ciclo4.app.model.User;
+import com.usa.ciclo4.app.model.Order;
 import com.usa.ciclo4.app.repositories.CloneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +24,16 @@ public class CloneService {
     }
 
     public Clone save(Clone c){
+
+        Optional<Clone> cloneIdMax = cloneRepository.lastCloneId();
+
+        if(c.getId()==null){
+            if (cloneIdMax.isEmpty())
+                c.setId(1);
+            else
+                c.setId(cloneIdMax.get().getId() + 1);
+        }
+
         if(c.getId()==null){
             return cloneRepository.save(c);
         }else{

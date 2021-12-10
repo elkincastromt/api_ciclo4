@@ -1,7 +1,7 @@
 package com.usa.ciclo4.app.controllers;
 
-import com.usa.ciclo4.app.model.Clone;
-import com.usa.ciclo4.app.services.CloneService;
+import com.usa.ciclo4.app.model.Order;
+import com.usa.ciclo4.app.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -9,39 +9,44 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("clone")
+@RequestMapping("order")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
-public class CloneController {
+public class OrderController {
 
     @Autowired
-    private CloneService CloneService;
+    private OrderService OrderService;
 
     @GetMapping("/all")
-    public List<Clone> getClones(){
-        return CloneService.getAll();
+    public List<Order> getOrders(){
+        return OrderService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Clone> getClone(@PathVariable("id") int id){
-        return CloneService.getClone(id);
+    public Optional<Order> getOrder(@PathVariable("id") int id){
+        return OrderService.getOrder(id);
+    }
+
+    @GetMapping("/zona/{zone}")
+    public List<Order> getOrderByZone(@PathVariable("zone") String zone){
+        return OrderService.getOrderByZone(zone);
     }
 
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public Clone save(@RequestBody Clone u){
-        return CloneService.save(u);
+    public Order save(@RequestBody Order o){
+        return OrderService.save(o);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Clone update(@RequestBody Clone u){
-        return CloneService.update(u);
+    public Order update(@RequestBody Order o){
+        return OrderService.update(o);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") Integer id){
-        return CloneService.deleteById(id);
+        return OrderService.deleteById(id);
     }
 
 }

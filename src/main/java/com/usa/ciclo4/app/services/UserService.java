@@ -36,6 +36,16 @@ public class UserService {
     }
 
     public User save(User u) {
+
+        Optional<User> userIdMax = userRepository.lastUserId();
+
+        if(u.getId()==null){
+            if (userIdMax.isEmpty())
+                u.setId(1);
+            else
+                u.setId(userIdMax.get().getId() + 1);
+        }
+
         if (u.getName() == null || u.getEmail() == null || u.getPassword() == null || u.getIdentification() == null || u.getType() == null) {
             return u;
         } else {

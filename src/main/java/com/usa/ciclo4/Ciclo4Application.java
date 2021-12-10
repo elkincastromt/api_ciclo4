@@ -2,6 +2,7 @@ package com.usa.ciclo4;
 
 import com.usa.ciclo4.app.repositories.crud.CloneCrudRepository;
 import com.usa.ciclo4.app.repositories.crud.UserCrudRepository;
+import com.usa.ciclo4.app.repositories.crud.OrderCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +15,8 @@ public class Ciclo4Application implements CommandLineRunner {
 	private CloneCrudRepository cloneCrudRepository;
 	@Autowired
 	private UserCrudRepository userCrudRepository;
+	@Autowired
+	private OrderCrudRepository orderCrudRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Ciclo4Application.class, args);
@@ -23,5 +26,6 @@ public class Ciclo4Application implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		userCrudRepository.deleteAll();
 		cloneCrudRepository.deleteAll();
+		orderCrudRepository.deleteAll();
 	}
 }

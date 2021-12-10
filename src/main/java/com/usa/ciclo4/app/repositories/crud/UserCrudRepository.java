@@ -15,4 +15,5 @@ public interface UserCrudRepository extends MongoRepository<User, Integer> {
 
     public Optional<User> findByEmailAndPassword(String email, String password);
 
+    Optional<User> findTopByOrderByIdDesc();
 }
