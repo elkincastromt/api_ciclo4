@@ -24,8 +24,8 @@ public class Ciclo4Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		userCrudRepository.deleteAll();
-		cloneCrudRepository.deleteAll();
-		orderCrudRepository.deleteAll();
+//		userCrudRepository.deleteAll();
+//		cloneCrudRepository.deleteAll();
+//		orderCrudRepository.deleteAll();
 	}
 }

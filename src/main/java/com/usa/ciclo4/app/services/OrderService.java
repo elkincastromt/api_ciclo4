@@ -26,6 +26,18 @@ public class OrderService {
         return orderRepository.getOrderByZone(zone);
     }
 
+    public List<Order> getOrderBySalesManId(Integer id){
+        return orderRepository.getOrderBySalesManId(id);
+    }
+
+    public List<Order> ordersSalesManByState(String state, Integer id){
+        return orderRepository.ordersSalesManByState(state, id);
+    }
+
+    public List<Order> ordersSalesManByDate(String dateStr, Integer id) {
+        return orderRepository.ordersSalesManByDate(dateStr,id);
+    }
+
     public Order save(Order o){
 
         Optional<Order> orderIdMax = orderRepository.lastOrderId();

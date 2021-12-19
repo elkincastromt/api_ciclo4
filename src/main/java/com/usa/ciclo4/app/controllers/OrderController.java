@@ -31,6 +31,21 @@ public class OrderController {
         return OrderService.getOrderByZone(zone);
     }
 
+    @GetMapping("/salesman/{id}")
+    public List<Order> getOrderBySalesManId(@PathVariable("id") Integer id){
+        return OrderService.getOrderBySalesManId(id);
+    }
+
+    @GetMapping("/state/{state}/{id}")
+    public List<Order> ordersSalesManByState(@PathVariable("state") String state, @PathVariable("id") Integer id){
+        return OrderService.ordersSalesManByState(state, id);
+    }
+
+    @GetMapping("/date/{date}/{id}")
+    public List<Order> ordersSalesManByDate(@PathVariable("date") String dateStr, @PathVariable("id") Integer id) {
+        return OrderService.ordersSalesManByDate(dateStr,id);
+    }
+
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public Order save(@RequestBody Order o){
