@@ -26,6 +26,16 @@ public class CloneController {
         return CloneService.getClone(id);
     }
 
+    @GetMapping("/description/{description}")
+    public List<Clone> getProductsByDescription(@PathVariable("description") String description){
+        return CloneService.getProductsByDescription(description);
+    }
+
+    @GetMapping("/price/{price}")
+    public List<Clone> getProductsByPrice(@PathVariable("price") Double price){
+        return CloneService.getProductsByPrice(price);
+    }
+
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public Clone save(@RequestBody Clone u){

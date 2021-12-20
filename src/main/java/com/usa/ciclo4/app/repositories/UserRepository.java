@@ -1,5 +1,6 @@
 package com.usa.ciclo4.app.repositories;
 
+import com.usa.ciclo4.app.model.Clone;
 import com.usa.ciclo4.app.model.User;
 import com.usa.ciclo4.app.repositories.crud.UserCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,10 @@ public class UserRepository {
 
     public Optional<User> lastUserId(){
         return userCrudRepository.findTopByOrderByIdDesc();
+    }
+
+    public List<User> getUsersByMonthBirthtDay(String monthBirthtDay){
+        return userCrudRepository.findByMonthBirthtDay(monthBirthtDay);
     }
 
 }

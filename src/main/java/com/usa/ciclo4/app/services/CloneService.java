@@ -1,7 +1,6 @@
 package com.usa.ciclo4.app.services;
 
 import com.usa.ciclo4.app.model.Clone;
-import com.usa.ciclo4.app.model.Order;
 import com.usa.ciclo4.app.repositories.CloneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +43,14 @@ public class CloneService {
                 return c;
             }
         }
+    }
+
+    public List<Clone> getProductsByDescription(String description){
+        return cloneRepository.getProductsByDescription(description);
+    }
+
+    public List<Clone> getProductsByPrice(Double price){
+        return cloneRepository.getProductsByPrice(price);
     }
 
     public Clone update(Clone c) {

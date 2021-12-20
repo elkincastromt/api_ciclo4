@@ -39,6 +39,11 @@ public class UserController {
         return UserService.getUserByEmail(email);
     }
 
+    @GetMapping("/birthday/{monthBirthtDay}")
+    public List<User> getUsersByMonthBirthtDay(@PathVariable("monthBirthtDay") String monthBirthtDay){
+        return UserService.getUsersByMonthBirthtDay(monthBirthtDay);
+    }
+
     @GetMapping("/{email}/{password}")
     public User existUser(@PathVariable("email") String email, @PathVariable("password") String password){
         return UserService.getUserByEmailAndPassword(email, password);

@@ -1,5 +1,6 @@
 package com.usa.ciclo4.app.services;
 
+import com.usa.ciclo4.app.model.Clone;
 import com.usa.ciclo4.app.model.User;
 import com.usa.ciclo4.app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,10 @@ public class UserService {
         } else {
             return new User();
         }
+    }
+
+    public List<User> getUsersByMonthBirthtDay(String monthBirthtDay){
+        return userRepository.getUsersByMonthBirthtDay(monthBirthtDay);
     }
 
     public User save(User u) {

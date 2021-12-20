@@ -1,10 +1,9 @@
 package com.usa.ciclo4.app.repositories;
 
 import com.usa.ciclo4.app.model.Clone;
-import com.usa.ciclo4.app.model.Order;
-import com.usa.ciclo4.app.model.User;
 import com.usa.ciclo4.app.repositories.crud.CloneCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,6 +14,9 @@ public class CloneRepository {
 
     @Autowired
     private CloneCrudRepository cloneCrudRepository;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public List<Clone> getAll(){
         return (List<Clone>) cloneCrudRepository.findAll();
@@ -34,5 +36,13 @@ public class CloneRepository {
 
     public Optional<Clone> lastCloneId(){
         return cloneCrudRepository.findTopByOrderByIdDesc();
+    }
+
+    public List<Clone> getProductsByDescription(String description){
+        return cloneCrudRepository.findByDescriptionLike(description);
+    }
+
+    public List<Clone> getProductsByPrice(Double price){
+        return cloneCrudRepository.findByPriceLessThanEqual(price);
     }
 }
